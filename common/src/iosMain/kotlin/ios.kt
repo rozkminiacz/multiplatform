@@ -1,4 +1,4 @@
-package org.greeting
+package org.common
 
 import kotlinx.cinterop.alloc
 import kotlinx.cinterop.memScoped

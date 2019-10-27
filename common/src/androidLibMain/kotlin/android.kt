@@ -1,4 +1,4 @@
-package org.greeting
+package org.common
 
 import android.os.Build
 

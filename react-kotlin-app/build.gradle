@@ -21,9 +21,10 @@ def jsDeps = [
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-js"
-    compile(jsDeps.kotlinx_html) { force = true }
-    compile jsDeps.kotlin_react
+    implementation(jsDeps.kotlinx_html) { force = true }
+    implementation jsDeps.kotlin_react
     testImplementation "org.jetbrains.kotlin:kotlin-test-js"
+    implementation project(":common")
 }
 
 compileKotlin2Js {

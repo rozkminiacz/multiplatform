@@ -1,4 +1,4 @@
-package org.greeting
+package org.common
 
 class Calculator {
     companion object {

@@ -7,13 +7,19 @@
 //
 
 import UIKit
-import greeting
+import common
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         let product = Factory().create(config: ["user": "JetBrains"])
+        
+        EventsRepository().getTestMessage{(response) in
+            print(response)
+            self.label.text = response
+        }
+        
         label.text = product.description
     }
 

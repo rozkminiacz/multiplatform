@@ -9,11 +9,9 @@ import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
 import io.ktor.features.DefaultHeaders
 import io.ktor.gson.gson
-import io.ktor.http.CacheControl
-import io.ktor.http.ContentType
-import io.ktor.http.HttpHeaders
-import io.ktor.http.HttpMethod
+import io.ktor.http.*
 import io.ktor.response.cacheControl
+import io.ktor.response.respond
 import io.ktor.response.respondText
 import io.ktor.response.respondTextWriter
 import io.ktor.routing.get
@@ -64,6 +62,9 @@ fun Application.main() {
             } finally {
                 events.cancel()
             }
+        }
+        get(("/api/test")){
+            call.respond(HttpStatusCode.OK to mapOf("status" to "success"))
         }
         route("/"){
             get {

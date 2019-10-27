@@ -1,4 +1,4 @@
-package org.greeting
+package org.common
 
 import kotlin.test.Test
 import kotlin.test.assertEquals

@@ -26,6 +26,6 @@ pluginManagement {
 
 enableFeaturePreview('GRADLE_METADATA')
 
-include ':greeting'
+include ':common'
 include ':androidApp'
 include ':react-kotlin-app'

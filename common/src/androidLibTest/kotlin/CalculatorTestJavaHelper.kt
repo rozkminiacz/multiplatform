@@ -1,4 +1,4 @@
-package org.greeting
+package org.common
 
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

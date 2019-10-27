@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.multiplatform'
 }
 
-group = 'org.greeting'
+group = 'tech.michalik.multiplatform.common'
 version = 1.0
 
 android {
@@ -19,6 +19,8 @@ android {
     }
 }
 
+def ktor_version = "1.2.3"
+
 dependencies {
     // Specify Kotlin/JVM stdlib dependency.
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7'
@@ -26,13 +28,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
     testImplementation 'org.jetbrains.kotlin:kotlin-test-junit'
-
-    androidTestImplementation 'junit:junit:4.12'
-    androidTestImplementation 'org.jetbrains.kotlin:kotlin-test'
-    androidTestImplementation 'org.jetbrains.kotlin:kotlin-test-junit'
-
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
 kotlin {
@@ -51,18 +46,47 @@ kotlin {
                 }
             }
         }
+        fromPreset(presets.js, 'js') {
+            compilations.main {
+                configure([compileKotlinJs, compileTestKotlinJs]) {
+                    kotlinOptions {
+                        languageVersion = "1.3"
+                        sourceMap = true
+                        metaInfo = true
+                        moduleKind = "umd"
+                    }
+                }
+            }
+        }
     }
 
     sourceSets {
         commonMain {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
+                implementation "io.ktor:ktor-client-core:$ktor_version"
             }
         }
         commonTest {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-test-common'
                 implementation 'org.jetbrains.kotlin:kotlin-test-annotations-common'
+            }
+        }
+        iosMain {
+            dependencies {
+                implementation "io.ktor:ktor-client-ios:$ktor_version"
+            }
+        }
+        androidMain {
+            dependencies {
+                implementation "io.ktor:ktor-client-android:$ktor_version"
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2"
+            }
+        }
+        jsMain {
+            dependencies {
+                implementation "io.ktor:ktor-client-js:$ktor_version"
             }
         }
     }
@@ -78,8 +102,8 @@ task copyFramework {
         copy {
             from srcFile.parent
             into targetDir
-            include 'greeting.framework/**'
-            include 'greeting.framework.dSYM'
+            include 'common.framework/**'
+            include 'common.framework.dSYM'
         }
     }
 }

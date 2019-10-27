@@ -1,4 +1,4 @@
-package org.greeting
+package org.common
 
 expect class Product {
     val user: String
