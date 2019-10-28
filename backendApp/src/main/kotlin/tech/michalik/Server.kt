@@ -64,7 +64,7 @@ fun Application.main() {
             }
         }
         get(("/api/test")){
-            call.respond(HttpStatusCode.OK to mapOf("status" to "success"))
+            call.respond(HttpStatusCode.OK, mapOf("status" to "success"))
         }
         route("/"){
             get {
